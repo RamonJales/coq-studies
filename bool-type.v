@@ -38,3 +38,9 @@ Check true.
 Check true : bool.
 Check and.
 
+Theorem negb_involutive : forall b : bool,
+  negb (negb b) = b.
+Proof. intros b. destruct b eqn:E.
+  - reflexivity.
+  - reflexivity. Qed.
+
