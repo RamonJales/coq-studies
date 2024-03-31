@@ -110,3 +110,19 @@ Example test_alternate4:
   alternate [] [20;30] = [20;30].
   Proof. reflexivity. Qed.
 Compute alternate ([1;2]) ([3;4]).
+
+Inductive natoption : Type :=
+  | Some (n : nat)
+  | None.
+
+Fixpoint nth_error (l:natlist) (n:nat) : natoption :=
+  match l with
+  | nil ⇒ None
+  | a :: l' ⇒ match n with
+               | O ⇒ Some a
+               | S n' ⇒ nth_error l' n'
+               end
+  end.
+Example test_nth_error1 : nth_error [4;5;6;7] 0 = Some 4.
+Example test_nth_error2 : nth_error [4;5;6;7] 3 = Some 7.
+Example test_nth_error3 : nth_error [4;5;6;7] 9 = None.
